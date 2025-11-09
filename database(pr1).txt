@@ -1,0 +1,215 @@
+Assignment No 1
+
+Code:
+
+Create() 
+{ 
+Echo “*********************create database**********************”; 
+Db=student; 
+Touch $db; 
+Echo “Database created successfully”; 
+} 
+Insert() 
+{ 
+Db=student; 
+Echo “*************Insert Record**************”; 
+Echo “How many records you want to insert?”; 
+Read no; 
+While [ $no -gt 0 ] 
+Do 
+Echo “Enter the name of student”; 
+Read name 
+Echo “Enter the branch of student”; 
+Read dept 
+Echo “Enter the address of student”; 
+Read addr 
+Echo “Enter the contact no of student”; 
+Read contact 
+Record=”||$name ||$dept ||$addr||$contact||”; 
+Echo $record >> $db; 
+Echo “Record inserted successfully.”; 
+No=$(( $no-1 )); 
+Done 
+} 
+Display() 
+{ 
+Db=”student”; 
+Echo “*************Display Record**************”; 
+Echo “Records present are as follows”; 
+Cat $db; 
+} 
+Search() 
+{ 
+Db=student; 
+Echo “*************Search Record**************” 
+Echo “Enter the name of student to search reacord” 
+Read name; 
+Grep -i “$name” “$db” 
+If [ $? -eq 0 ] 
+Then 
+Echo “Record found”; 
+Else 
+Echo “Record not found”;  
+Fi 
+} 
+Delete() 
+{ 
+Db=student; 
+Echo “*************Delete Record**************”; 
+Echo “Enter name of student whose record you want to delete”; 
+Read name; 
+If grep “$name” “$db” 
+Then 
+Grep -v “$name” “$db” >temp 
+Mv temp $db 
+Echo “Record of student exist and deleted”; 
+Else 
+Echo “Record of student not exist please enter valid name”; 
+Fi  
+} 
+Modify() 
+{ 
+Db=student; 
+Echo “*************Modify Record**************”; 
+Echo “Enter the name of student you want to modify”; 
+Read name 
+If grep “$name” “$db” 
+Then  
+Sed -i /$name/d $db; 
+Echo “Enter record with modified values”; 
+Echo “Enter new name branch address contact of student”; 
+Read name dept addr contact 
+Record=”|| $name  || $dept  || $addr  || $contact  ||”; 
+Echo $record >> $db; 
+Echo “record Modified successfully”; 
+Else 
+Echo “record doesnt exist so cant modify enter valid record name” 
+Fi 
+} 
+Clear 
+Echo “***********Student address Book***************”; 
+Menu= “1)Create Database 
+2)Insert Records 
+3)Display Record 
+4)Search Record 
+5)Delete Record 
+6)Modify Record 
+7)Exit”; 
+While [ true ] 
+Do 
+Echo “$menu”; 
+Echo “Enter your choice”; 
+Read ch; 
+Case $ch in  
+1)create; 
+;; 
+2)insert; 
+;; 
+3)display; 
+;; 
+4)search; 
+;; 
+5)delete; 
+;; 
+6)modify; 
+;; 
+7)exit; 
+;; 
+*)echo “Invalid choice please enter valid number from 1 to 7”; 
+;; 
+Esac 
+Done 
+
+
+********************************************************************************************
+
+Output:- 
+***********Student address Book*************** 
+Pr1.sh: 90: 1)Create Database 
+2)Insert Records 
+3)Display Record 
+4)Search Record 
+5)Delete Record 
+6)Modify Record 
+7)Exit: not found 
+Enter your choice 
+1 
+*********************create database********************** 
+Database created successfully 
+Enter your choice 
+2 
+*************Insert Record************** 
+How many records you want to insert? 
+3 
+Enter the name of student 
+Sahil 
+Enter the branch of student 
+IT 
+Enter the address of student 
+Malegaon 
+Enter the contact no of student 
+8421953951 
+Record inserted successfully. 
+Enter the name of student 
+Abhi 
+Enter the branch of student 
+Comp 
+Enter the address of student 
+BMT 
+Enter the contact no of student 
+896541236 
+Record inserted successfully. 
+Enter the name of student 
+Ayush 
+Enter the branch of student 
+Mech 
+Enter the address of student 
+Pune 
+Enter the contact no of student 
+9874562136 
+Record inserted successfully. 
+Enter your choice 
+3 
+*************Display Record************** 
+Records present are as follows 
+||Sahil ||IT ||Malegaon||8421953951|| 
+||Abhi ||Comp ||BMT||896541236|| 
+||Ayush ||Mech ||Pune||9874562136|| 
+Enter your choice 
+4 
+*************Search Record************** 
+Enter the name of student to search reacord 
+Sahil 
+||Sahil ||IT ||Malegaon||8421953951|| 
+Record found 
+Enter your choice 
+5 
+*************Delete Record************** 
+Enter name of student whose record you want to delete 
+Abhi 
+||Abhi ||Comp ||BMT||896541236|| 
+Record of student exist and deleted 
+Enter your choice 
+3 
+*************Display Record************** 
+Records present are as follows 
+||Sahil ||IT ||Malegaon||8421953951|| 
+||Ayush ||Mech ||Pune||9874562136|| 
+Enter your choice 
+6 
+*************Modify Record************** 
+Enter the name of student you want to modify 
+Ayush 
+||Ayush ||Mech ||Pune||9874562136|| 
+Enter record with modified values 
+Enter new name branch address contact of student 
+Abhi ENTC Mumbai 7356455625 
+Record Modified successfully 
+Enter your choice 
+3 
+*************Display Record************** 
+Records present are as follows 
+||Sahil ||IT ||Malegaon||8421953951|| 
+|| Abhi || ENTC || Mumbai || 7356455625 || 
+Enter your choice 
+7

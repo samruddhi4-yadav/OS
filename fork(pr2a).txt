@@ -1,0 +1,115 @@
+Assignment No-2(A)
+
+Code: 
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+
+void bubblesort(int arr[],int n)
+{
+	for(int i=0;i<n-1;i++)
+	{
+		for(int j=0;j<n-i-1;j++)
+		{
+			if(arr[j]>arr[j+1])
+			{
+				int temp=arr[j];
+				arr[j]=arr[j+1];
+				arr[j+1]=temp;
+			}
+		}
+	}
+}
+
+void slectionsort(int arr[],int n)
+{
+	for(int i=0;i<n-1;i++)
+	{
+		int min=i;
+		for(int j=i+1;j<n;j++)
+		{
+			if(arr[j]<arr[min])
+			{
+				min=j;
+			}
+		}
+		int temp=arr[i];
+		arr[i]=arr[min];
+		arr[min]=temp;
+	}
+}
+
+int main()
+{
+	int n;
+	printf("\n Enter the number of elements:");
+	scanf("%d",&n);
+	int arr[n];
+	
+	printf("\n Enter %d integers:\n",n);
+	for(int i=0;i<n;i++)
+	{
+	 	scanf("%d",&arr[i]);
+	}
+	
+	pid_t pid=fork();
+	
+	if(pid<0)
+	{
+		printf("\n fork failed...!");
+		return 1;
+	}
+	else if(pid==0)
+	{
+		printf("child process(PID:%d) sordind using bubble sort...\n",getpid());
+		bubblesort(arr,n);
+		printf("\n child process sorted array (bubble sort):");
+		
+		for(int i=0;i<n;i++)
+			printf("\t %d",arr[i]);
+		printf("\n");
+		exit(0);
+	}
+	else
+	{
+		sleep(5);
+		printf("\n Parent process(PID:%d) sording using slection  sort.... \n",getpid());
+		slectionsort(arr,n);
+		printf("\n parent process sorted array (selection sort):");
+		
+		
+		for(int i=0;i<n;i++)
+			printf("\t %d",arr[i]);
+		printf("\n");
+		exit(0);
+	}
+	return 0;
+}
+		
+		
+	 
+	
+	
+*******************************************************************************************
+Output: 
+dell@dell-Latitude-E5430-non-vPro:~/Downloads$ gcc pr2a.c -o pr2a
+dell@dell-Latitude-E5430-non-vPro:~/Downloads$ ./pr2a
+
+Enter the number of elements:5
+
+Enter 5 integers:
+34
+12
+21
+67
+10
+child process(PID:3428) sordind using bubble sort...
+
+ child process sorted array (bubble sort):	 10	 12	 21	 34	 67
+
+ Parent process(PID:3421) sording using slection  sort.... 
+
+ parent process sorted array (selection sort):	 10	 12	 21	 34	 67
+dell@dell-Latitude-E5430-non-vPro:~/Downloads$
+
