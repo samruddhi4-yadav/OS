@@ -1,0 +1,95 @@
+Practical 1 Basic commands:
+
+dell@dell-Latitude-E5430-non-vPro:~$ ls
+ 
+dell@dell-Latitude-E5430-non-vPro:~$ cd Documents
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ ls
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ mkdir pr1
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ ls
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ pwd
+/home/dell/Documents
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ rmdir pr1
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ ls
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ echo "Hello word..";
+Hello word..
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ touch pr1
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ ls
+ 
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ cat basic.txt
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ grep "system" basic.txt
+Operating system...
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ sed "2d" basic.txt
+
+
+dell@dell-Latitude-E5430-non-vPro:~/Documents$ cd
+
+dell@dell-Latitude-E5430-non-vPro:~$ 
+
+
+
+********************************************************************************
+
+Arithmatic operations:
+
+
+
+while true;
+	do
+		echo "";
+		echo "Aritmatic operations";
+		echo "1. Addition";
+		echo "2. Substarction";
+		echo "3. Multiplication";
+		echo "4. Division";
+		echo "5. Exit";
+		
+		echo "==========================";
+		read -p"Enter your choice[1-5]=" ch
+		case $ch in
+			1)
+				read -p"Enter the number 1=" a
+				read -p"Enter the number 2=" b
+				result=$((a+b))
+				echo "Addition of two number=$result";
+			  ;;
+			2)
+				read -p"Enter the number 1=" a
+				read -p"Enter the number 2=" b
+				result=$((a-b))
+				echo "Substraction of two number=$result";
+			  ;;
+			3)
+				read -p"Enter the number 1=" a
+				read -p"Enter the number 2=" b
+				result=$((a*b))
+				echo "Multiplication of two number=$result";
+			  ;;
+			4)
+				read -p"Enter the number 1=" a
+				read -p"Enter the number 2=" b
+				result=$((a/b))
+				echo "Division of two number=$result";
+			  ;;
+			5)
+			 	echo "Exiting...";
+			 	break;
+			  ;;
+			*)
+			   	echo "Invalid choice plse enter valid number[1-5]";
+			   ;;
+		esac
+	done
+	
+				
+
